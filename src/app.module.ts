@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
 import {SequelizeModule} from "@nestjs/sequelize";
 import {ConfigModule, ConfigService} from "@nestjs/config";
+import {AperoModule} from './apero/apero.module';
 
 @Module({
   imports: [
@@ -18,10 +19,9 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
         synchronize: true
       }),
       inject: [ConfigService],
-    })
+    }),
+    AperoModule
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {
 }
