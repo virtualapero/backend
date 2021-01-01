@@ -72,4 +72,14 @@ export class AperoService {
             }
         }
     }
+
+    async delete(apero: Apero): Promise<void> {
+        for (const topic of apero.topics) {
+            for (const link of topic.links) {
+                await link.destroy();
+            }
+            await topic.destroy();
+        }
+        await apero.destroy();
+    }
 }

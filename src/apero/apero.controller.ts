@@ -26,7 +26,7 @@ export class AperoController {
     async getOneById(@Param("id", ParseIntPipe) id: number): Promise<Apero> {
         let apero = await this.aperoService.findOneByID(id);
 
-        if (apero) {
+        if (!apero) {
             throw new NotFoundException();
         }
 
@@ -36,13 +36,22 @@ export class AperoController {
     @Post()
     @ApiCreatedResponse({description: "Apero created"})
     @ApiBadRequestResponse({description: "Validation failed"})
-    async create(@Body() dto: CreateAperoDto) {
+    async create(@Body() dto: CreateAperoDto): Promise<void> {
         return this.aperoService.create(dto);
     }
 
     @Delete("/:id")
-    async delete() {
+    @ApiOkResponse({description: "Apero deleted"})
+    @ApiBadRequestResponse({description: "Validation failed"})
+    @ApiNotFoundResponse({description: "Apero not found"})
+    async delete(@Param("id", ParseIntPipe) id: number): Promise<void> {
+        const apero = await this.aperoService.findOneByID(id);
 
+        if (!apero) {
+            throw new NotFoundException();
+        }
+
+        return this.aperoService.delete(apero);
     }
 
     @Put()
