@@ -12,7 +12,7 @@ export default class CreateAperoDto {
 
     @ApiProperty()
     @IsNumber()
-    member: number;
+    member: number; //TODO Placeholder
 
     @ApiProperty({type: [TopicDto]})
     @IsArray()

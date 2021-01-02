@@ -1,9 +1,21 @@
-import {Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    NotFoundException,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    Query
+} from '@nestjs/common';
 import Apero from "./apero.model";
 import {AperoService} from "./apero.service";
 import {ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags} from "@nestjs/swagger";
 import {PaginatorDto} from "../dto/paginator.dto";
 import CreateAperoDto from "./dto/create.dto";
+import AperoUpdateDto from "./dto/update.dto";
 
 @ApiTags("apero")
 @Controller('apero')
@@ -54,9 +66,15 @@ export class AperoController {
         return this.aperoService.delete(apero);
     }
 
-    @Put()
-    async update() {
+    @Patch()
+    async update(@Body() dto: AperoUpdateDto) {
+        const apero = await this.aperoService.findOneByID(dto.id);
 
+        if (!apero) {
+            throw new NotFoundException();
+        }
+
+        return this.aperoService.update(apero, dto);
     }
 
 }

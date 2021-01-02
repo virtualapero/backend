@@ -4,13 +4,16 @@ import {ApiProperty} from "@nestjs/swagger";
 @Table({timestamps: false})
 export default class Apero extends Model<Apero> {
 
+    @ApiProperty()
+    id: number;
+
     @Column(DataType.DATEONLY)
     @ApiProperty({format: "date"})
     date: Date;
 
     @Column
     @ApiProperty({description: "Placeholder!"})
-    member: number; //Placeholder
+    member: number; //TODO Placeholder
 
     @HasMany(() => Topic)
     @ApiProperty({type: () => [Topic]})
@@ -20,6 +23,9 @@ export default class Apero extends Model<Apero> {
 
 @Table({timestamps: false})
 export class Topic extends Model<Topic> {
+
+    @ApiProperty()
+    id: number;
 
     @Column
     @ApiProperty()
@@ -40,6 +46,9 @@ export class Topic extends Model<Topic> {
 
 @Table({timestamps: false})
 export class Link extends Model<Link> {
+
+    @ApiProperty()
+    id: number;
 
     @Column
     @ApiProperty()

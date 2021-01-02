@@ -1,5 +1,5 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {IsArray, IsString, IsUrl, ValidateNested} from "class-validator";
+import {IsArray, IsDate, IsNumber, IsOptional, IsString, IsUrl, ValidateNested} from "class-validator";
 import {Type} from "class-transformer";
 
 export class LinkDto {
