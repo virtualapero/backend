@@ -21,12 +21,12 @@ jobs:
               MYSQL_DATABASE: apero
               MYSQL_ROOT_PASSWORD: APERO
           ports:
-              - 3306
+              - 3308:3306
           options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     env:
-      HOST: 127.0.0.1
-      PORT: 3306
+      HOST: localhost
+      PORT: 3308
       USERNAME: root
       PASSWORD: APERO
       DATABASE: apero
