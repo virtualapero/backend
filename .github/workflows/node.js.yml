@@ -27,7 +27,7 @@ jobs:
 
     env:
       HOST: mysql
-      PORT: ${{ job.services.mysql.ports[3306] }}
+      PORT: 3306
       USERNAME: root
       PASSWORD: APERO
       DATABASE: apero
