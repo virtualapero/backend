@@ -69,6 +69,7 @@ describe('Apero', () => {
             .get('/apero/1')
             .expect(200)
             .expect( {
+                id: 1,
                 date: "2021-01-01",
                 member: 8,
                 topics: []
@@ -85,11 +86,12 @@ describe('Apero', () => {
             .expect(200)
     });
 
-    it(`GET apero (check POST)`, () => {
+    it(`GET apero (check PATCH)`, () => {
         return request(app.getHttpServer())
             .get('/apero/1')
             .expect(200)
             .expect( {
+                id: 1,
                 date: "2021-02-01",
                 member: 8,
                 topics: []
@@ -102,6 +104,7 @@ describe('Apero', () => {
             .expect(200)
             .expect([
                 {
+                    id: 1,
                     date: "2021-02-01",
                     member: 8,
                     topics: []
