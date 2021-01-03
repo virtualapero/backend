@@ -4,6 +4,7 @@ import {AperoModule} from "../src/apero/apero.module";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import * as request from 'supertest';
+import {config} from "rxjs";
 
 describe('Apero', () => {
     let app: INestApplication;
@@ -24,7 +25,7 @@ describe('Apero', () => {
                         password: configService.get('PASSWORD'),
                         database: configService.get('DATABASE'),
                         entities: ['src/**/*.entity{.ts,.js}'],
-                        synchronize: configService.get('ENV') === "DEV",
+                        synchronize: true,
                     }),
                     inject: [
                         ConfigService
