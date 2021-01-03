@@ -18,16 +18,15 @@ jobs:
       mysql:
           image: mysql:5.7
           env:
-              MYSQL_ALLOW_EMPTY_PASSWORD: yes
               MYSQL_DATABASE: apero
               MYSQL_ROOT_PASSWORD: APERO
           ports:
-              - 3306
+              - 3308:3306
           options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     env:
-      HOST: mysql
-      PORT: ${{ job.services.mysql.ports[3306] }}
+      HOST: localhost
+      PORT: 3308
       USERNAME: root
       PASSWORD: APERO
       DATABASE: apero
@@ -35,7 +34,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [10.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
