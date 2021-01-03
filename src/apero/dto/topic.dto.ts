@@ -1,14 +1,15 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {IsArray, IsDate, IsNumber, IsOptional, IsString, IsUrl, ValidateNested} from "class-validator";
+import {IsArray, IsString, IsUrl, MaxLength, ValidateNested} from "class-validator";
 import {Type} from "class-transformer";
 
 export class LinkDto {
 
-    @ApiProperty()
+    @ApiProperty({maxLength: 250})
     @IsString()
+    @MaxLength(250)
     name: string;
 
-    @ApiProperty()
+    @ApiProperty({format: "url"})
     @IsUrl()
     url: string;
 
@@ -16,12 +17,14 @@ export class LinkDto {
 
 export class TopicDto {
 
-    @ApiProperty()
+    @ApiProperty({maxLength: 250})
     @IsString()
+    @MaxLength(250)
     name: string;
 
-    @ApiProperty()
+    @ApiProperty({maxLength: 16777000})
     @IsString()
+    @MaxLength(16777000)
     description: string;
 
     @ApiProperty({type: [LinkDto]})

@@ -1,12 +1,16 @@
 import {Module} from '@nestjs/common';
 import {AperoController} from "./apero.controller";
 import {AperoService} from "./apero.service";
-import {SequelizeModule} from "@nestjs/sequelize";
-import Apero, {Link, Topic} from "./apero.model";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {Apero, Link, Topic} from "./apero.entity";
 
 @Module({
     imports: [
-        SequelizeModule.forFeature([Apero, Topic, Link]),
+        TypeOrmModule.forFeature([
+            Apero,
+            Topic,
+            Link
+        ])
     ],
     controllers: [
         AperoController,
